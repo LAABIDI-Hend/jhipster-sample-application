@@ -52,6 +52,12 @@
         <dd>
           <span>{{ employee.commissionPct }}</span>
         </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.employee.birthday">Birthday</span></dt>
+        <dd>
+          <div *ngIf="employee.birthday">
+            <a [routerLink]="['/date', employee.birthday.id, 'view']">{{ employee.birthday.id }}</a>
+          </div>
+        </dd>
         <dt><span jhiTranslate="jhipsterSampleApplicationApp.employee.manager">Manager</span></dt>
         <dd>
           <div *ngIf="employee.manager">

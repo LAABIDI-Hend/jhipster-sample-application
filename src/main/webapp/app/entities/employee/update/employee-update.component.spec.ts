@@ -9,6 +9,8 @@ import { of, Subject, from } from 'rxjs';
 import { EmployeeFormService } from './employee-form.service';
 import { EmployeeService } from '../service/employee.service';
 import { IEmployee } from '../employee.model';
+import { IDate } from 'app/entities/date/date.model';
+import { DateService } from 'app/entities/date/service/date.service';
 import { IDepartment } from 'app/entities/department/department.model';
 import { DepartmentService } from 'app/entities/department/service/department.service';
 
@@ -20,6 +22,7 @@ describe('Employee Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let employeeFormService: EmployeeFormService;
   let employeeService: EmployeeService;
+  let dateService: DateService;
   let departmentService: DepartmentService;
 
   beforeEach(() => {
@@ -43,12 +46,35 @@ describe('Employee Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     employeeFormService = TestBed.inject(EmployeeFormService);
     employeeService = TestBed.inject(EmployeeService);
+    dateService = TestBed.inject(DateService);
     departmentService = TestBed.inject(DepartmentService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
+    it('Should call Date query and add missing value', () => {
+      const employee: IEmployee = { id: 456 };
+      const birthday: IDate = { id: 45648 };
+      employee.birthday = birthday;
+
+      const dateCollection: IDate[] = [{ id: 27187 }];
+      jest.spyOn(dateService, 'query').mockReturnValue(of(new HttpResponse({ body: dateCollection })));
+      const additionalDates = [birthday];
+      const expectedCollection: IDate[] = [...additionalDates, ...dateCollection];
+      jest.spyOn(dateService, 'addDateToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ employee });
+      comp.ngOnInit();
+
+      expect(dateService.query).toHaveBeenCalled();
+      expect(dateService.addDateToCollectionIfMissing).toHaveBeenCalledWith(
+        dateCollection,
+        ...additionalDates.map(expect.objectContaining)
+      );
+      expect(comp.datesSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should call Employee query and add missing value', () => {
       const employee: IEmployee = { id: 456 };
       const manager: IEmployee = { id: 4374 };
@@ -95,6 +121,8 @@ describe('Employee Management Update Component', () => {
 
     it('Should update editForm', () => {
       const employee: IEmployee = { id: 456 };
+      const birthday: IDate = { id: 93985 };
+      employee.birthday = birthday;
       const manager: IEmployee = { id: 79320 };
       employee.manager = manager;
       const department: IDepartment = { id: 60127 };
@@ -103,6 +131,7 @@ describe('Employee Management Update Component', () => {
       activatedRoute.data = of({ employee });
       comp.ngOnInit();
 
+      expect(comp.datesSharedCollection).toContain(birthday);
       expect(comp.employeesSharedCollection).toContain(manager);
       expect(comp.departmentsSharedCollection).toContain(department);
       expect(comp.employee).toEqual(employee);
@@ -178,6 +207,16 @@ describe('Employee Management Update Component', () => {
   });
 
   describe('Compare relationships', () => {
+    describe('compareDate', () => {
+      it('Should forward to dateService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(dateService, 'compareDate');
+        comp.compareDate(entity, entity2);
+        expect(dateService.compareDate).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
     describe('compareEmployee', () => {
       it('Should forward to employeeService', () => {
         const entity = { id: 123 };

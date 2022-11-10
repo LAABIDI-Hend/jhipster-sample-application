@@ -38,6 +38,9 @@
             <column name="commission_pct" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="birthday_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_employee__birthday_id" />
+            </column>
             <column name="manager_id" type="bigint">
                 <constraints nullable="true" />
             </column>

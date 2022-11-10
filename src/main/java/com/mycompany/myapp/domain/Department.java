@@ -42,7 +42,7 @@ public class Department implements Serializable {
     @Schema(description = "A relationship")
     @OneToMany(mappedBy = "department")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "jobs", "manager", "department" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "birthday", "jobs", "manager", "department" }, allowSetters = true)
     private Set<Employee> employees = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -39,6 +39,7 @@ type EmployeeFormGroupContent = {
   hireDate: FormControl<EmployeeFormRawValue['hireDate']>;
   salary: FormControl<EmployeeFormRawValue['salary']>;
   commissionPct: FormControl<EmployeeFormRawValue['commissionPct']>;
+  birthday: FormControl<EmployeeFormRawValue['birthday']>;
   manager: FormControl<EmployeeFormRawValue['manager']>;
   department: FormControl<EmployeeFormRawValue['department']>;
 };
@@ -68,6 +69,7 @@ export class EmployeeFormService {
       hireDate: new FormControl(employeeRawValue.hireDate),
       salary: new FormControl(employeeRawValue.salary),
       commissionPct: new FormControl(employeeRawValue.commissionPct),
+      birthday: new FormControl(employeeRawValue.birthday),
       manager: new FormControl(employeeRawValue.manager),
       department: new FormControl(employeeRawValue.department),
     });
