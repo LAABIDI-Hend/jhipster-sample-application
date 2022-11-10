@@ -86,6 +86,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="birthday.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.employee.birthday">Birthday</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="manager.id">
             <div class="d-flex">
               <span jhiTranslate="jhipsterSampleApplicationApp.employee.manager">Manager</span>
@@ -119,6 +125,11 @@
           <td>{{ employee.hireDate | formatMediumDatetime }}</td>
           <td>{{ employee.salary }}</td>
           <td>{{ employee.commissionPct }}</td>
+          <td>
+            <div *ngIf="employee.birthday">
+              <a [routerLink]="['/date', employee.birthday.id, 'view']">{{ employee.birthday.id }}</a>
+            </div>
+          </td>
           <td>
             <div *ngIf="employee.manager">
               <a [routerLink]="['/employee', employee.manager.id, 'view']">{{ employee.manager.id }}</a>

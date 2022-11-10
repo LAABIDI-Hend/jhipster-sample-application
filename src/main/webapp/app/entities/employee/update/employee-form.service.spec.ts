@@ -28,6 +28,7 @@ describe('Employee Form Service', () => {
             hireDate: expect.any(Object),
             salary: expect.any(Object),
             commissionPct: expect.any(Object),
+            birthday: expect.any(Object),
             manager: expect.any(Object),
             department: expect.any(Object),
           })
@@ -48,6 +49,7 @@ describe('Employee Form Service', () => {
             hireDate: expect.any(Object),
             salary: expect.any(Object),
             commissionPct: expect.any(Object),
+            birthday: expect.any(Object),
             manager: expect.any(Object),
             department: expect.any(Object),
           })

@@ -1,0 +1,26 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "date": {
+      "home": {
+        "title": "Dates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Date",
+        "createOrEditLabel": "Create or edit a Date",
+        "notFound": "No Dates found"
+      },
+      "created": "A new Date is created with identifier {{ param }}",
+      "updated": "A Date is updated with identifier {{ param }}",
+      "deleted": "A Date is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Date {{ id }}?"
+      },
+      "detail": {
+        "title": "Date"
+      },
+      "id": "ID",
+      "day": "Day",
+      "month": "Month",
+      "year": "Year"
+    }
+  }
+}

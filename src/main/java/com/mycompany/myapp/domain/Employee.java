@@ -56,13 +56,17 @@ public class Employee implements Serializable {
     @Column(name = "commission_pct")
     private Long commissionPct;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Date birthday;
+
     @OneToMany(mappedBy = "employee")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "tasks", "employee" }, allowSetters = true)
     private Set<Job> jobs = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "jobs", "manager", "department" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "birthday", "jobs", "manager", "department" }, allowSetters = true)
     private Employee manager;
 
     /**
@@ -190,6 +194,19 @@ public class Employee implements Serializable {
 
     public void setCommissionPct(Long commissionPct) {
         this.commissionPct = commissionPct;
+    }
+
+    public Date getBirthday() {
+        return this.birthday;
+    }
+
+    public void setBirthday(Date date) {
+        this.birthday = date;
+    }
+
+    public Employee birthday(Date date) {
+        this.setBirthday(date);
+        return this;
     }
 
     public Set<Job> getJobs() {

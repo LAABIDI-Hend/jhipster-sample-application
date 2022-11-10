@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20221110141527",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "date",
+  "fields": [
+    {
+      "fieldName": "day",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "month",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Date",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

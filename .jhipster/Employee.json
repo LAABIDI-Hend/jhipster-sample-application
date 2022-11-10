@@ -47,6 +47,12 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityName": "date",
+      "ownerSide": true,
+      "relationshipName": "birthday",
+      "relationshipType": "one-to-one"
+    },
+    {
       "otherEntityName": "job",
       "otherEntityRelationshipName": "employee",
       "relationshipName": "job",
